@@ -10,5 +10,20 @@ public class Deposito {
           this.capacidad = capacidad;
           this.operador = operador;
      }
+     public synchronized void agregarProducto(tipo producto) throws InterruptedException {
+          while (productos.size() == capacidad) {
+              wait();  
+          }
+          productos.add(producto);
+          notifyAll();  
+      }
+      public synchronized tipo retirarProducto(tipo tipo) throws InterruptedException {
+          while (productos.isEmpty() || !productos.contains(tipo)) {
+              wait();  
+          }
+          tipo producto = productos.remove(productos.indexOf(tipo));
+          notifyAll();  
+          return producto;
+      }
 
 }
