@@ -1,5 +1,5 @@
 public class Operador extends Thread {
-    private int finAContados;
-    private int finBContados;
+    private int finAContados = 0;
+    private int finBContados = 0;
 
 }
