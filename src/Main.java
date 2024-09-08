@@ -19,16 +19,16 @@ public class Main {
         Deposito depositoProduccion = new Deposito(capDepProd, operadorProduccion);
         Deposito depositoDistribucion = new Deposito(capDepDist, operadorDistribucion);
 
-        tipo tipoVal = tipo.A;
+        Tipo tipoVal = Tipo.A;
         for (int i = 0 ; i < 4 ; i++){
-            tipoVal = i%2 == 0 ? tipo.A : tipo.B;
+            tipoVal = i%2 == 0 ? Tipo.A : Tipo.B;
             System.out.print("Ingrese el número de productps a generar para el productor " + (i+1) + " que es de tipo " + tipoVal + ":" );
             int numProductos = scanner.nextInt();
             Productor productor = new Productor(tipoVal, numProductos, depositoProduccion);
             productor.start();
         }
         for (int i = 0 ; i < 4 ; i++){
-            tipoVal = i%2 == 0 ? tipo.A : tipo.B;
+            tipoVal = i%2 == 0 ? Tipo.A : Tipo.B;
             Distribuidor distribuidor = new Distribuidor(tipoVal, depositoDistribucion);
             distribuidor.start();
         }

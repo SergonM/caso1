@@ -1,4 +1,4 @@
 public class Cinta {
-    private tipo producto;
+    private Tipo producto;
 
 }
