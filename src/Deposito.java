@@ -3,12 +3,10 @@ import java.util.ArrayList;
 public class Deposito {
      private ArrayList<Tipo> productos = new ArrayList<>();
      private int capacidad;
-     private Operador operador;
      //private Cinta cinta;
 
-     public Deposito(int capacidad, Operador operador){
+     public Deposito(int capacidad){
           this.capacidad = capacidad;
-          this.operador = operador;
      }
      public synchronized void agregarProducto(Tipo producto) throws InterruptedException {
           while (productos.size() == capacidad) {
@@ -29,7 +27,10 @@ public class Deposito {
             indice =  productos.indexOf(Tipo.A) != -1 ? productos.indexOf(Tipo.A) : productos.indexOf(Tipo.FIN_A);
         } else if (tipo == Tipo.B) {
             indice = productos.indexOf(Tipo.B) != -1 ? productos.indexOf(Tipo.B) : productos.indexOf(Tipo.FIN_B);
+        } else if (tipo == Tipo.OP) {
+            indice = 0;
         }
+
 
         Tipo producto = productos.remove(indice);
         System.out.println("Producto retirado: " + producto);

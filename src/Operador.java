@@ -2,7 +2,7 @@ public class Operador extends Thread {
     private Deposito deposito;
     private Cinta cinta;
     private Tipo tipo;
-    private boolean esFaseProduccion;  
+    private boolean esFaseProduccion;
     private int finAContados = 0;
     private int finBContados = 0;
 
@@ -19,7 +19,7 @@ public class Operador extends Thread {
             while (true) {
                 
                 if (esFaseProduccion) {
-                    Tipo producto = deposito.retirarProducto(tipo);  
+                    Tipo producto = deposito.retirarProducto(tipo);
                     if (producto == Tipo.FIN_A || producto == Tipo.FIN_B) {
                         System.out.println("Operario ha visto un producto de fin en la fase de producción (" + producto + ").");
                         cinta.agregarACinta(producto);
@@ -31,7 +31,7 @@ public class Operador extends Thread {
                     }
                 } else {
                     
-                    Tipo producto = cinta.retirarDeCinta();  
+                    Tipo producto = cinta.retirarDeCinta();
                     if (producto == Tipo.FIN_A || producto == Tipo.FIN_B) {
                         System.out.println("Operario ha visto un producto de fin en la fase de distribución (" + producto + ").");
                         deposito.agregarProducto(producto);
