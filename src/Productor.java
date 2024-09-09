@@ -15,6 +15,7 @@ public class Productor extends Thread {
         try {
             for (int i = 0; i < cantidad; i++) {
                 depositoProduc.agregarProducto(tipo);
+                Thread.sleep(500);
             }
             depositoProduc.agregarProducto(tipo == Tipo.A ? Tipo.FIN_A: Tipo.FIN_B);
             System.out.println("Productor de tipo " + tipo + " terminó su trabajo");

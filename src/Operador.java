@@ -17,7 +17,6 @@ public class Operador extends Thread {
     public void run() {
         try {
             while (true) {
-                
                 if (esFaseProduccion) {
                     Tipo producto = deposito.retirarProducto(tipo);
                     if (producto == Tipo.FIN_A || producto == Tipo.FIN_B) {
@@ -42,7 +41,7 @@ public class Operador extends Thread {
                         System.out.println("Operario movió un producto " + producto + " al depósito de distribución.");
                     }
                 }
-                Thread.yield(); 
+                Thread.yield();
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
