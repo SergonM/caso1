@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,12 +33,12 @@ public class Main {
         
         for (int i = 0 ; i < 4 ; i++){
             tipoVal = i%2 == 0 ? Tipo.A : Tipo.B;
-            Productor productor = new Productor("P"+(i+1), tipoVal, numProductosD.get(i), depositoProduccion);
+            Productor productor = new Productor("Productor "+(i+1), tipoVal, numProductosD.get(i), depositoProduccion);
             productor.start();
         }
         for (int i = 0 ; i < 4 ; i++){
             tipoVal = i%2 == 0 ? Tipo.A : Tipo.B;
-            Distribuidor distribuidor = new Distribuidor("D"+(i+1), tipoVal, depositoDistribucion);
+            Distribuidor distribuidor = new Distribuidor("Distribuidor "+(i+1), tipoVal, depositoDistribucion);
             distribuidor.start();
         }
         operadorProduccion.start();

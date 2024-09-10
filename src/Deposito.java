@@ -12,20 +12,22 @@ public class Deposito {
     }
 
     public synchronized void agregarProducto(Tipo producto, String id) throws InterruptedException {
-        while (productos.size() == capacidad) {
+        while (contarTiposAB() == capacidad) {
             wait();
         }
         productos.add(producto);
-        System.out.println("Producto " + producto + " almacenado en dep " + responsabilidad + ", gracias al productor: " + id);
+        System.out.println("Producto " + producto + " almacenado en dep " + responsabilidad + ", gracias a: " + id);
         notifyAll();
     }
 
     public synchronized Tipo retirarProducto(Tipo tipo, String id) throws InterruptedException {
         //System.out.println(tipo + "---" + productos.size() + "---------------" + productos.isEmpty());
-        while (productos.isEmpty() || (!productos.contains(tipo) && tipo != Tipo.OP)) {
-            //System.out.println("VA A DORMIR");
+        while (productos.isEmpty()
+        || ((tipo != Tipo.OP && !productos.contains(tipo))
+        && (tipo != Tipo.OP && (tipo == Tipo.A? !productos.contains(Tipo.FIN_A): !productos.contains(Tipo.FIN_B))))){
             wait();
         }
+
 
         int indice = -1;
         if (tipo == Tipo.A) {
@@ -37,10 +39,20 @@ public class Deposito {
         }
 
         Tipo producto = productos.remove(indice);
-        System.out.println("Producto " + producto + " retirado de dep " + responsabilidad + ", gracias al distribuidor :" + id);
+        System.out.println("Producto " + producto + " retirado de dep " + responsabilidad + ", gracias a :" + id);
         notifyAll();
         return producto;
 
+    }
+
+    private int contarTiposAB() {
+        int contador = 0;
+        for (Tipo tipo : productos) {
+            if (tipo == Tipo.A || tipo == Tipo.B) {
+                contador++;
+            }
+        }
+        return contador;
     }
 
 }

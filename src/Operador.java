@@ -22,29 +22,26 @@ public class Operador extends Thread {
                 if (esFaseProduccion) {
                     Tipo producto = deposito.retirarProducto(tipo, this.id);
                     if (producto == Tipo.FIN_A || producto == Tipo.FIN_B) {
-                        System.out.println("Operario ha visto un producto de fin en la fase de producción (" + producto + ").");
-                        cinta.agregarACinta(producto);
+                        cinta.agregarACinta(this.id ,producto);
                         contarProductoFin(producto);
                         if (finAContados == 2 && finBContados == 2) break;
                     } else {
-                        cinta.agregarACinta(producto);
-                        System.out.println("Operario movió un producto " + producto + " a la cinta.");
+                        cinta.agregarACinta(this.id,producto);
                     }
                 } else {
                     
-                    Tipo producto = cinta.retirarDeCinta();
+                    Tipo producto = cinta.retirarDeCinta(this.id);
                     if (producto == Tipo.FIN_A || producto == Tipo.FIN_B) {
-                        System.out.println("Operario ha visto un producto de fin en la fase de distribución (" + producto + ").");
                         deposito.agregarProducto(producto, this.id);
                         contarProductoFin(producto);
                         if (finAContados == 2 && finBContados == 2) break;
                     } else {
                         deposito.agregarProducto(producto, this.id);
-                        System.out.println("Operario movió un producto " + producto + " al depósito de distribución.");
                     }
                 }
                 Thread.yield();
             }
+            System.out.println("Operador " + this.id + " terminó su trabajo");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -19,7 +19,7 @@ public class Distribuidor extends Thread {
                 }
                 //Thread.sleep(500);
             }
-            System.out.println("Distribuidor de tipo " + tipo + " terminó su trabajo");
+            System.out.println("Distribuidor " + this.id + " de tipo " + this.tipo + " terminó su trabajo");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
